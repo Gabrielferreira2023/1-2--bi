@@ -1,0 +1,77 @@
+#include <stdio.h>
+
+
+struct Aluno {
+    int matricula;
+    char nome[100];
+    float nota1;
+    float nota2;
+    float nota3;
+};
+
+int main() {
+    struct Aluno alunos[5];
+
+
+    for (int i = 0; i < 5; i++) {
+        printf("Digite a matrícula do aluno %d: ", i+1);
+        scanf("%d", &alunos[i].matricula);
+
+        printf("Digite o nome do aluno %d: ", i+1);
+        scanf(" %[^\n]", alunos[i].nome);
+
+        printf("Digite a nota da primeira prova do aluno %d: ", i+1);
+        scanf("%f", &alunos[i].nota1);
+
+        printf("Digite a nota da segunda prova do aluno %d: ", i+1);
+        scanf("%f", &alunos[i].nota2);
+
+        printf("Digite a nota da terceira prova do aluno %d: ", i+1);
+        scanf("%f", &alunos[i].nota3);
+
+        printf("\n");
+    }
+
+    int indiceMaiorNota1 = 0;
+
+    for (int i = 1; i < 5; i++) {
+        if (alunos[i].nota1 > alunos[indiceMaiorNota1].nota1) {
+            indiceMaiorNota1 = i;
+        }
+    }
+
+
+    int indiceMaiorMediaGeral = 0;
+    float maiorMediaGeral = (alunos[0].nota1 + alunos[0].nota2 + alunos[0].nota3) / 3;
+
+    for (int i = 1; i < 5; i++) {
+        float mediaGeral = (alunos[i].nota1 + alunos[i].nota2 + alunos[i].nota3) / 3;
+        if (mediaGeral > maiorMediaGeral) {
+            maiorMediaGeral = mediaGeral;
+            indiceMaiorMediaGeral = i;
+        }
+    }
+
+    int indiceMenorMediaGeral = 0;
+    float menorMediaGeral = (alunos[0].nota1 + alunos[0].nota2 + alunos[0].nota3) / 3;
+
+    for (int i = 1; i < 5; i++) {
+        float mediaGeral = (alunos[i].nota1 + alunos[i].nota2 + alunos[i].nota3) / 3;
+        if (mediaGeral < menorMediaGeral) {
+            menorMediaGeral = mediaGeral;
+            indiceMenorMediaGeral = i;
+        }
+    }
+
+    for (int i = 0; i < 5; i++) {
+        float mediaGeral = (alunos[i].nota1 + alunos[i].nota2 + alunos[i].nota3) / 3;
+
+        if (mediaGeral >= 7.0) {
+            printf("O aluno %s foi aprovado!\n", alunos[i].nome);
+        } else {
+            printf("O aluno %s foi reprovado!\n", alunos[i].nome);
+        }
+    }
+
+    return 0;
+}
